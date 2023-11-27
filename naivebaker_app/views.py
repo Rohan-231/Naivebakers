@@ -55,8 +55,6 @@ def viewlogin(request) :
     return render(request,'login.html')
 
 def signup(request) :
-        if request.user.is_anonymous:
-            return redirect("/")
         if request.method == "POST" :
             uname = request.POST.get("username")
             email = request.POST.get("email")
@@ -86,6 +84,7 @@ def signup(request) :
             profile_obj.save()
             messages.info(request,'Sign Up is Done Successfully,Please Login')
             return redirect('/signup')
+        
         return render(request,'signup.html')
 
 def home(request) :
