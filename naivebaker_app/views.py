@@ -189,8 +189,6 @@ def myrecipe(request) :
 
 
 def ChangePassword(request , token):
-    if request.user.is_anonymous:
-        return redirect("/")
     context = {}
 
     try:
@@ -198,7 +196,7 @@ def ChangePassword(request , token):
         context = {'user_id' : profile_obj.user.id}
         
         if request.method == 'POST':
-            print("coome on babayay")
+            # print("coome on babayay")
             new_password = request.POST.get('new_password')
             confirm_password = request.POST.get('reconfirm_password')
             user_id = request.POST.get('user_id')
@@ -223,8 +221,6 @@ def ChangePassword(request , token):
 
 import uuid
 def ForgetPassword(request):
-    if request.user.is_anonymous:
-        return redirect("/")
     try:
         print("comes here")
         if request.method == 'POST':
