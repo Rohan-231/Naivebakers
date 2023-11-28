@@ -21,5 +21,8 @@
             "src": "/(.*)",
             "dest": "naivebaker/wsgi.py"
         }
+    ],
+    "rewrites": [
+        { "source": "/(.*)", "destination": "/" }
     ]
 }
