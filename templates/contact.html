@@ -171,8 +171,8 @@
 
                 <div class="a2">Contact us today, and get reply within 24 hours!</div>
                 <form method="POST" id="contactForm" name="contactForm" class="contactForm ">
+                    {% csrf_token %}
                     <br />
-
                     <div class="a3">
                         <!-- name -->
                         <input type="text" class="form-control" name="name" id="name" placeholder="Name" required />
