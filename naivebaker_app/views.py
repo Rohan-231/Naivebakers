@@ -61,31 +61,45 @@ def signup(request) :
             password = request.POST.get("password1")
             confirmpassword = request.POST.get("password2")
 
-            if password != confirmpassword :
-                messages.warning(request,"Password is Incorrect") 
-                return redirect('/signup')
-            
-            try : 
-                 if User.objects.get(username=uname):
-                    messages.info(request,'UserName is Taken')
-                    return redirect('/signup')
-            except :
-                 pass
-            try : 
-                 if User.objects.get(email=email):
-                    messages.info(request,'Email is Taken')
-                    return redirect('/signup')
-            except :
-                 pass
+            if (len(password) >= 8 and           # Minimum length of 8 characters
+                any(char.isdigit() for char in password) and        # At least one digit
+                any(char.isupper() for char in password) and        # At least one uppercase letter
+                any(char in '!@#$%^&*(),.?":{}|<>' for char in password)  # At least one special character
+                ):
 
-            myuser = User.objects.create_user(uname,email,password)
-            myuser.save()
-            profile_obj = Profile.objects.create(user = myuser )
-            profile_obj.save()
-            messages.info(request,'Sign Up is Done Successfully,Please Login')
-            return redirect('/signup')
-        
+                if password != confirmpassword :
+                    messages.warning(request,"Password is Incorrect") 
+                    return redirect('/signup')
+                
+                try : 
+                    if User.objects.get(username=uname):
+                        messages.info(request,'UserName is Taken')
+                        return redirect('/signup')
+                except :
+                    pass
+                try : 
+                    if User.objects.get(email=email):
+                        messages.info(request,'Email is Taken')
+                        return redirect('/signup')
+                except :
+                    pass
+
+                myuser = User.objects.create_user(uname,email,password)
+                myuser.save()
+                profile_obj = Profile.objects.create(user = myuser )
+                profile_obj.save()
+                messages.info(request,'Sign Up is Done Successfully,Please Login')
+                return redirect('/signup')
+
+            
+            else:
+                # Password is valid, you can save it to the database or perform other actions
+                messages.error(request, "Enter valid password with one digit,one capital letter and one special charactor and length should greaater than 8.")
+                return redirect('/signup')
+                    
         return render(request,'signup.html')
+
+
 
 def home(request) :
     if request.user.is_anonymous:
