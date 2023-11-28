@@ -124,7 +124,7 @@ def addRecipe(request) :
             recipe.image = request.FILES['image']
         recipe.save()
         messages.success(request, "Recipe is added successfully!!!")
-        redirect('/addRecipe')
+        return redirect('/addRecipe')
 
     return render(request,'addRecipe.html')
 
@@ -166,7 +166,7 @@ def contact(request) :
             contacts = Contact(name=name,email=email,recipe_name = recipe_name,phone = phone,feedback=feedback,date = datetime.today())
             contacts.save()
             messages.success(request, "Thanks for your valuable feedback")
-            redirect('/contact')
+            return redirect('/contact')
         return render(request,'contact.html')
 
 @login_required
