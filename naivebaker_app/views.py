@@ -166,7 +166,7 @@ def contact(request) :
             contact = Contact(name=name,email=email,recipe_name = recipe_name,phone = phone,feedback=feedback,date = datetime.today())
             contact.save()
             messages.success(request, "Thanks for your valuable feedback")
-            redirect('/contactus')
+            redirect('/contact')
         return render(request,'contact.html')
 
 @login_required
