@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from naivebaker_app.models import Contact,Recipe
-from datetime import datetime
+from datetime import date
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core import mail
@@ -163,7 +163,7 @@ def contact(request) :
             recipe_name = request.POST.get('recipe_name')
             phone = request.POST.get('phone')
             feedback = request.POST.get('message')
-            contacts = Contact(name=name,email=email,recipe_name = recipe_name,phone = phone,feedback=feedback,date = datetime.today())
+            contacts = Contact(name=name,email=email,recipe_name = recipe_name,phone = phone,feedback=feedback,date = date.today())
             contacts.save()
             messages.success(request, "Thanks for your valuable feedback")
             return redirect('/contact')
