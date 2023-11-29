@@ -166,6 +166,15 @@ def contact(request) :
             contacts = Contact(name=name,email=email,recipe_name = recipe_name,phone = phone,feedback=feedback,date = date.today())
             contacts.save()
             messages.success(request, "Thanks for your valuable feedback")
+
+            from_email = settings.EMAIL_HOST_USER
+            connection = mail.get_connection()
+            connection.open()
+            email_message = mail.EmailMessage(f'Email from {name}',f'UserEmail : {email}\n UserPhoneNumber : {phone}\n recipeName : {recipe_name}\n\n\n Query : {feedback}',from_email,['rnmistry03@gmail.com','202101231@daiict.ac.in'],connection=connection)
+            client = mail.EmailMessage(f'Naivebaker feedback mail','Thanks for reaching Us \n\n roh.tech\n8780304699\n rohan@rohan.tech',from_email,[email],connection=connection)
+            connection.send_messages([email_message,client])
+            connection.close()
+
             return redirect('/contact')
         return render(request,'contact.html')
 
