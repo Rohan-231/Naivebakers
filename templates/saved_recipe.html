@@ -468,12 +468,15 @@
         generateRandomNumber();
     };
 
-    function generateRandomNumber() {
-        // Generate a random number between 3 and 5 with one decimal place
-        var randomNumber = (Math.random() * (5 - 3) + 3).toFixed(1);
+    function generateRandomNumberForAll() {
+        // Get all elements with the id "randomnum"
+        var randomNumElements = document.querySelectorAll("#randomnum");
 
-        // Display the random number in the paragraph with id "randomNumber"
-        document.getElementById("randomnum").innerHTML = "Random Number: " + randomNumber;
+        // Iterate through each element and set a random number
+        randomNumElements.forEach(function(element) {
+            var randomNumber = (Math.random() * (5 - 3) + 3).toFixed(1);
+            element.innerHTML = randomNumber;
+        });
     }
         </script>
     </body>
