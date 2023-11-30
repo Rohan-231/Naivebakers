@@ -414,7 +414,7 @@
                             </div>
 
                             <div class="fs-6 fw-bolder">
-                                <span style="color: blue;">4.5</span>
+                                <span id="randomnum" style="color: blue;"></span>
                                 <span style="color: orange;">rating</span>
                             </div>
                         </div>
@@ -464,7 +464,17 @@
             function openInNewTab(link) {
                 window.open(link, '_blank');
             }
-            
+            window.onload = function() {
+        generateRandomNumber();
+    };
+
+    function generateRandomNumber() {
+        // Generate a random number between 3 and 5 with one decimal place
+        var randomNumber = (Math.random() * (5 - 3) + 3).toFixed(1);
+
+        // Display the random number in the paragraph with id "randomNumber"
+        document.getElementById("randomnum").innerHTML = "Random Number: " + randomNumber;
+    }
         </script>
     </body>
     
