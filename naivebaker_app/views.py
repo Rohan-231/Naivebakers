@@ -94,7 +94,7 @@ def signup(request) :
             
             else:
                 # Password is valid, you can save it to the database or perform other actions
-                messages.error(request, "Enter valid password with one digit,one capital letter and one special charactor and length should greaater than 8.")
+                messages.error(request, "Enter valid password with one digit,one capital letter and one special charactor and length should greater than Eight.")
                 return redirect('/signup')
                     
         return render(request,'signup.html')
