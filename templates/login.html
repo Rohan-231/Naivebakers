@@ -61,15 +61,11 @@
             {% csrf_token %}
             
             {% if messages %}
-
-            {% for message in messages %}
-            <div class="alert alert-info">
-                {{ message }}
-            </div>
-            {% endfor %}
+                <div class="alert alert-info">
+                    {{ messages|last }}
+                </div>
             {% endif %}
-           
-
+                
             <!-- Email input -->
             <div class="form-outline mb-4">
                 <input type="text" id="form3Example3" name="username" class="form-control form-control-lg"
