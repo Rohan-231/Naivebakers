@@ -192,7 +192,7 @@
 
             
             <h1 class="navbar-title"><p1 class="fa-solid fa-bowl-food fa-2xl"
-                style="color:rgb(255, 255, 255);"></p1>Naive-Baker</h1>
+                style="color:rgb(255, 255, 255);" onclick="redirectToHome()"></p1>Naive-Baker</h1>
             <nav class="navbar-menu">
                 <button onclick="gotopagehome()" type="button" id="home">Home</button>
                 <button onclick="gotopageadd()" type="button" id="add">Add-Recipe</button>
@@ -220,6 +220,10 @@
             function gotopageprofile() {
                 window.location.assign("/dashboard")
        }
+              function redirectToHome() {
+        // Replace 'home.html' with the actual URL of your home page
+        window.location.href = '/home';
+    }
             const toggleMenuOpen = () => document.body.classList.toggle("open");
             function functionToExecute() {
                 window.location.assign("/logout")
