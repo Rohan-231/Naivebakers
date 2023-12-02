@@ -934,7 +934,7 @@
 
             <div class="fourth d-flex justify-content-between">
                 <div class="lss like likeone mx-auto">
-                    <button class="btn btn-transparent btn-sm " name="like" id="like">
+                    <button class="btn btn-transparent btn-sm like-btn" name="like" id="like">
                         <i class="fa-solid fa-heart"></i>
                         Like
                     </button>
@@ -965,6 +965,14 @@
             `
         });
         resultsList.innerHTML = html;
+
+        document.querySelectorAll('.like-btn').forEach((button) => {
+            button.addEventListener('click', function () {
+                // Change the background color of the upper class to 'rgb(285, 66, 149)'
+                const upperClass = this.closest('.like');
+                upperClass.style.backgroundColor = 'rgb(285, 66, 149)';
+            });
+        });
         mealType="";
         ingredients=["" ,"",""];
         cuisineType="";
