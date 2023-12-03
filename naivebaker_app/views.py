@@ -21,7 +21,22 @@ import base64
 from urllib.parse import unquote
 
 
+# password constrints
+def validate_custom_password(password):
+    # Implement your custom password constraints
+    # Example: Minimum length 8, maximum length 12, at least one special character, one uppercase letter, and one digit
+    if len(password) < 8 or len(password) > 12:
+        raise ValidationError("Password must be between 8 and 12 characters.")
 
+    if not any(char.isdigit() for char in password):
+        raise ValidationError("Password must contain at least one digit.")
+
+    if not any(char.isupper() for char in password):
+        raise ValidationError("Password must contain at least one uppercase letter.")
+
+    if not any(char.isalnum() for char in password):
+        raise ValidationError("Password must contain at least one special character.")
+        
 
 # Create your views here
 def index(request) :
@@ -211,36 +226,48 @@ def myrecipe(request) :
     return render(request, 'myrecipe.html', {'user_recipes': user_recipes})
 
 
-def ChangePassword(request , token):
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
+
+def ChangePassword(request, token):
     context = {}
 
     try:
-        profile_obj = Profile.objects.filter(forget_password_token = token).first()
-        context = {'user_id' : profile_obj.user.id}
-        
+        profile_obj = Profile.objects.filter(forget_password_token=token).first()
+        context = {'user_id': profile_obj.user.id}
+
         if request.method == 'POST':
-            # print("coome on babayay")
             new_password = request.POST.get('new_password')
             confirm_password = request.POST.get('reconfirm_password')
             user_id = request.POST.get('user_id')
-            
-            if user_id is  None:
-                messages.success(request, 'No user id found.')
+
+            if user_id is None:
+                messages.error(request, 'No user id found.')
                 return redirect(f'/change-password/{token}/')
-                
-            
-            if  new_password != confirm_password:
-                messages.success(request, 'both should  be equal.')
-                return redirect(f'/change-password/{token}/')                    
-            
-            user_obj = User.objects.get(id = user_id)
+
+            if new_password != confirm_password:
+                messages.error(request, 'Passwords do not match.')
+                return redirect(f'/change-password/{token}/')
+
+            user_obj = User.objects.get(id=user_id)
+
+            # Validate the new password using custom constraints
+            try:
+                validate_custom_password(new_password)
+            except ValidationError as e:
+                messages.error(request, f"Password validation failed: {', '.join(e.messages)}")
+                return redirect(f'/change-password/{token}/')
+
             user_obj.set_password(new_password)
             user_obj.save()
-            return redirect('/login') 
-            
+            return redirect('/login')
+
     except Exception as e:
-        print(e)
-    return render(request , 'change-password.html' , context)
+        messages.error(request, f"An error occurred: {e}")
+
+    return render(request, 'change-password.html', context)
+
+
 
 import uuid
 def ForgetPassword(request):
