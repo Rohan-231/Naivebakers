@@ -189,15 +189,15 @@
                     <!-- recipe name -->
                     <div class="a5">
                         <input type="text" class="form-control" id="recipe_name" name="recipe_name"
-                            placeholder="recipe_name" />
+                            placeholder="recipe_name" required />
                     </div>
 
                     <br />
 
                     <div class="a5">
                         <!-- phone number -->
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="phone number"
-                            required />
+                        <input type="tel" class="form-control" id="phone" name="phone"  placeholder="phone number"
+                           pattern="[0-9]{10}" required />
                     </div>
                     <br />
 
@@ -217,7 +217,7 @@
 
                     <div class="a6">
                         <input name="message" class="form-control" id="message" cols="20" rows="3"
-                            placeholder="Type your review here"></textarea>
+                            placeholder="Type your review here" required></textarea>
                     </div>
 
                     <input type="submit" name="submit" id="submit" class="submit">
