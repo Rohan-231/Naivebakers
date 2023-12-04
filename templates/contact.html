@@ -196,8 +196,12 @@
 
                     <div class="a5">
                         <!-- phone number -->
-                        <input type="tel" class="form-control" id="phone" name="phone"  placeholder="phone number"
-                           pattern="[0-9]{10}" required />
+<!--                         <input type="tel" class="form-control" id="phone" name="phone"  placeholder="phone number"
+                           pattern="[0-9]{10}" required /> -->
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number"
+                               pattern="[0-9]{10}" required oninvalid="this.setCustomValidity('Please enter a valid 10-digit phone number')"
+                               oninput="this.setCustomValidity('')" />
+
                     </div>
                     <br />
 
