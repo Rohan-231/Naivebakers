@@ -202,13 +202,20 @@
                     <br />
 
                     <fieldset class="a7 ">
-                        <label>Reason for Contact:</label>
+<!--                         <label>Reason for Contact:</label>
                         <select id="reason" name="reason">
                             <option value="none" selected disabled hidden>
                                 select query
                             </option>
                             <option value="general">General Query</option>
                             <option value="feedback">Feedback</option>
+                            <option value="other">Other</option>
+                        </select> -->
+                        <label for="reason">Reason for Contact:</label>
+                        <select id="reason" name="reason" required>
+                            <option value="none" disabled hidden>Select query</option>
+                            <option value="general">General Query</option>
+                            <option value="feedback" selected>Feedback</option>
                             <option value="other">Other</option>
                         </select>
                     </fieldset>
